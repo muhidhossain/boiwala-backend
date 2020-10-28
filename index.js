@@ -21,7 +21,7 @@ const updateTime = day + "-" + month + "-" + year;
 app.get('/allBooks', (req, res) => {
     client = new MongoClient(uri, { useNewUrlParser: true });
     client.connect(err => {
-        const collection = client.db("boi-wala").collection("allBooks");
+        const collection = client.db("boiwala").collection("allBooks");
         collection.find().toArray((err, documents) => {
             if (err) {
                 res.status(500).send({ message: err });
@@ -38,7 +38,7 @@ app.get('/allBooks/:key', (req, res) => {
     const id = req.params.id;
     client = new MongoClient(uri, { useNewUrlParser: true });
     client.connect(err => {
-        const collection = client.db("boi-wala").collection("allBooks");
+        const collection = client.db("boiwala").collection("allBooks");
         collection.find({ id }).toArray((err, documents) => {
             if (err) {
                 console.log(err)
@@ -57,7 +57,7 @@ app.post('/addBooks', (req, res) => {
     allBooks.addedTime = updateTime;
     client = new MongoClient(uri, { useNewUrlParser: true });
     client.connect(err => {
-        const collection = client.db("boi-wala").collection("allBooks");
+        const collection = client.db("boiwala").collection("allBooks");
         collection.insertOne(allBooks, (err, result) => {
             if (err) {
                 res.status(500).send({ message: err });
@@ -75,7 +75,7 @@ app.post('/placeOrder', (req, res) => {
     orderDetails.orderTime = updateTime;
     client = new MongoClient(uri, { useNewUrlParser: true });
     client.connect(() => {
-        const collection = client.db("boi-wala").collection("orders");
+        const collection = client.db("boiwala").collection("orders");
         collection.insertOne(orderDetails, (err, result) => {
             if (err) {
                 console.log(err);
@@ -92,7 +92,7 @@ app.post('/placeOrder', (req, res) => {
 app.get('/orders', (req, res) => {
     client = new MongoClient(uri, { useNewUrlParser: true });
     client.connect(err => {
-        const collection = client.db("boi-wala").collection("orders");
+        const collection = client.db("boiwala").collection("orders");
         collection.find().toArray((err, documents) => {
             if (err) {
                 res.status(500).send({ message: err });
